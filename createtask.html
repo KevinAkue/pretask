@@ -1,0 +1,105 @@
+<html>
+<center>
+    <head>
+      <title>Happiness tracker</title>
+      <script>
+            var pics = ["<img src='ques1.png' width='250px' length='250px'>","<img src = 'ques2.png' width='30%' length='30%'>","<img src = 'ques3.png' width='30%' length='30%'>","<img src = 'ques4.png' width='30%' length='30%'>", "<img src = 'ques5.png' width='30%' length='30%'>","<img src='key.png' width='80%' length='80%'>"  ];
+            var solutions = ["yes","yes","yes","yes","yes"];
+            var answers =[]; // Populate this with user answers
+            var index = 0; // Add one to this in getUserAnswers to advance
+            var score = 0; // This gets added to in the checkAnswers() function
+            var table = ""; // This gets created in the displayResult() function
+            function getUserAnswers()
+            {
+              answers[index] = document.getElementById('userAns').value;
+              index = index + 1;
+              if(index >= 5)
+              {
+                checkAnswers();
+              }
+              document.getElementById('picture').innerHTML =pics[index];
+
+
+            }
+
+            function checkAnswers()
+            {
+
+              if(answers[0] == solutions[0])
+              {
+                score++;
+              }
+              if(answers[1] == solutions[1])
+              {
+                score++;
+              }
+
+              if(answers[2] == solutions[2])
+              {
+                score++;
+              }
+
+              if(answers[3] == solutions[3])
+              {
+                score++;
+              }
+
+              if(answers[4] == solutions[4])
+              {
+                score++;
+              }
+
+              displayResult();
+            }
+
+            function displayResult()
+            {
+
+              table = table + "Score:" + "&nbsp" + score + "/5"
+
+              document.getElementById('display').innerHTML = table;
+              document.getElementById('again').style.visibility = "visible";
+            }
+
+            function reset()
+            {
+
+              score = 0;
+              table = "";
+              var target = 1;
+              for(var i=answers.length-1;i>=0; i--)
+            {
+              if(answers[i] == target)
+              {
+                answers.splice(i,1);
+              }
+            }
+              document.getElementById('display').innerHTML = table ;
+              document.getElementById('picture').innerHTML = pics[0];
+              document.getElementById('again').style.visibility = "hidden";
+              index = 0;
+            }
+
+            function hide()
+            {
+
+              document.getElementById('again').style.visibility = "hidden";
+            }
+      </script>
+    </head>
+
+
+    <body onload="hide()">
+    
+       <h2></h2>
+       <br><br>
+       <span id="picture"><img src="ques1.png" width='250px' length='250px'></span>
+       <br><br>
+       <span id="display"></span>
+       <br><br>
+       <input id="userAns" type="text" onfocus="this.value=''">
+       <input id="next" type="button" value="Next" onclick="getUserAnswers()">
+       <input id="again" type="button" value="Play Again" onload="hide()" onclick="reset()">
+    </body>
+</center>
+</html>
